@@ -1,6 +1,6 @@
 OrgaNick's Guide API
 
-This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables, pests and treatments and join tables for which pests prefer which vegetables (dinner-and-diners) and for which treatments work on which pests (villains-and-kryptonite).
+This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables, pests and treatments and join tables for which pests prefer which vegetables (dinner-and-diners) and for which treatments work on which pests (pest-weaknesses).
 
 ## API
 
