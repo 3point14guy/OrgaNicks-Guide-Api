@@ -28,7 +28,7 @@ curl "${API}${URL_PATH}" \
     "vegetable": {
       "name": "Corn",
       "image": "http://i.imgur.com/IysO0qE.jpg",
-      "comment": "Enter comments here"
+      "comments": "Enter comments here"
     }
   }'
 

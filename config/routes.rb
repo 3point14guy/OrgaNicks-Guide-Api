@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   resources :vegetables, except: [:new, :edit]
   resources :examples, except: [:new, :edit]
+  resources :pests, except: [:new, :edit]
+  resources :gardens, except: [:new, :edit]
 end
