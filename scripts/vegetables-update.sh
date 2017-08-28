@@ -17,7 +17,7 @@ curl --include --request PATCH http://localhost:4741/vegetables/8 \
     "vegetable": {
       "name": "Squash",
       "image": "http://i.imgur.com/IysO0qE.jpg",
-      "comment": "4 rows planted"
+      "comments": "4 rows planted"
     }
   }'
 
