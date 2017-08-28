@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :vegetables, except: [:new, :edit]
   resources :examples, except: [:new, :edit]
   resources :pests, except: [:new, :edit]
+  resources :gardens, except: [:new, :edit]
 end
