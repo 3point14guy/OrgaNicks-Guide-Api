@@ -1,4 +1,4 @@
-class GardensController < ApplicationController
+class GardensController < OpenReadController
   before_action :set_garden, only: [:show, :update, :destroy]
 
   # GET /gardens
@@ -15,7 +15,7 @@ class GardensController < ApplicationController
 
   # POST /gardens
   def create
-    @garden = Garden.new(garden_params)
+    @garden = current_user.gardens.build(garden_params)
 
     if @garden.save
       render json: @garden, status: :created, location: @garden
@@ -41,11 +41,11 @@ class GardensController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_garden
-      @garden = Garden.find(params[:id])
+      @garden = current_user.gardens.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def garden_params
-      params.require(:garden).permit(:vegetable_id, :user_id)
+      params.require(:garden).permit(:vegetable_id)
     end
 end
