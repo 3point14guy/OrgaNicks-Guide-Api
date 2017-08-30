@@ -1,5 +1,5 @@
 #!/bin/bash
-EMAIL=@a.com
+EMAIL=a@a.com
 PASSWORD=a
 PASSWORD=a
 API="${API_ORIGIN:-http://localhost:4741}"
