@@ -1,6 +1,8 @@
 OrgaNick's Guide API
 
-This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables, pests and treatments and join tables for which pests prefer which vegetables (dinner-and-diners) and for which treatments work on which pests (pest-weaknesses).
+This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables and pests and join tables for which pests prefer which vegetables (dinner-and-diners). In the near future, tables will be added for treatments and for which treatments work on which pests (pest-weaknesses).
+
+This API was built with Ruby on Rails.
 
 ## API
 
@@ -12,14 +14,15 @@ Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
 own scripts to test your custom API. As an alternative, you can write automated
 tests in RSpec to test your API.
 
-### Authentication
+### Vegeatables
 
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/:id` | `users#changepw`  |
-| DELETE | `/sign-out/:id`        | `users#signout`   |
+| Verb   | URI Pattern            | Controller#Action  |
+|--------|------------------------|--------------------|
+| GET    | `/vegetables`          | `vegetables#index` |
+| POST   | `/vegetables`          |`vegetables#create` |
+| GET    | `/vegetables/:id`      |`vegetables#show`   |
+| PATCH  | `/vegetables/:id`      |`vegetables#update` |
+| DELETE | `/vegetables/:id`      |`vegetables#destroy`|
 
 #### POST /sign-up
 
