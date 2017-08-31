@@ -46,6 +46,6 @@ class DinnerAndDinersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def dinner_and_diner_params
-      params.require(:dinner_and_diner).permit(:vegetables_id, :pests_id)
+      params.require(:dinner_and_diner).permit(:vegetable_id, :pest_id)
     end
 end

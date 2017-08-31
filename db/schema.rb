@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 20170831015657) do
   enable_extension "plpgsql"
 
   create_table "dinner_and_diners", force: :cascade do |t|
-    t.integer  "vegetables_id"
-    t.integer  "pests_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["pests_id"], name: "index_dinner_and_diners_on_pests_id", using: :btree
-    t.index ["vegetables_id"], name: "index_dinner_and_diners_on_vegetables_id", using: :btree
+    t.integer  "vegetable_id"
+    t.integer  "pest_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["pest_id"], name: "index_dinner_and_diners_on_pest_id", using: :btree
+    t.index ["vegetable_id"], name: "index_dinner_and_diners_on_vegetable_id", using: :btree
   end
 
   create_table "examples", force: :cascade do |t|
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20170831015657) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "dinner_and_diners", "pests", column: "pests_id"
-  add_foreign_key "dinner_and_diners", "vegetables", column: "vegetables_id"
+  add_foreign_key "dinner_and_diners", "pests"
+  add_foreign_key "dinner_and_diners", "vegetables"
   add_foreign_key "examples", "users"
   add_foreign_key "gardens", "users"
   add_foreign_key "gardens", "vegetables"
