@@ -1,5 +1,6 @@
 class GardenSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :comments
   has_one :vegetable
   has_one :user
+
 end
