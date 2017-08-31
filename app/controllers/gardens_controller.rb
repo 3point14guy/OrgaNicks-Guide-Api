@@ -3,7 +3,7 @@ class GardensController < OpenReadController
 
   # GET /gardens
   def index
-    @gardens = Garden.all
+    @gardens = current_user.gardens.all
 
     render json: @gardens
   end
@@ -46,6 +46,6 @@ class GardensController < OpenReadController
 
     # Only allow a trusted parameter "white list" through.
     def garden_params
-      params.require(:garden).permit(:vegetable_id)
+      params.require(:garden).permit(:vegetable_id, :comments)
     end
 end

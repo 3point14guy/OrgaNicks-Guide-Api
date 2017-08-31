@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829135608) do
+ActiveRecord::Schema.define(version: 20170831183121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dinner_and_diners", force: :cascade do |t|
+    t.integer  "vegetable_id"
+    t.integer  "pest_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["pest_id"], name: "index_dinner_and_diners_on_pest_id", using: :btree
+    t.index ["vegetable_id"], name: "index_dinner_and_diners_on_vegetable_id", using: :btree
+  end
 
   create_table "examples", force: :cascade do |t|
     t.text     "text",       null: false
@@ -28,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170829135608) do
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.text     "comments"
     t.index ["user_id"], name: "index_gardens_on_user_id", using: :btree
     t.index ["vegetable_id"], name: "index_gardens_on_vegetable_id", using: :btree
   end
@@ -36,10 +46,8 @@ ActiveRecord::Schema.define(version: 20170829135608) do
     t.string   "name"
     t.string   "image"
     t.text     "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "vegetable_id"
-    t.index ["vegetable_id"], name: "index_pests_on_vegetable_id", using: :btree
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,8 +68,9 @@ ActiveRecord::Schema.define(version: 20170829135608) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "dinner_and_diners", "pests"
+  add_foreign_key "dinner_and_diners", "vegetables"
   add_foreign_key "examples", "users"
   add_foreign_key "gardens", "users"
   add_foreign_key "gardens", "vegetables"
-  add_foreign_key "pests", "vegetables"
 end
