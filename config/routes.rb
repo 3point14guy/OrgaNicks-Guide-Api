@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   delete '/sign-out/:id' => 'users#signout'
   patch '/change-password/:id' => 'users#changepw'
   resources :users, only: [:index, :show]
-  resources :vegetables, except: [:new, :edit]
+  resources :vegetables
   resources :examples, except: [:new, :edit]
-  resources :pests, except: [:new, :edit]
+  resources :pests
   resources :gardens, except: [:new, :edit]
   resources :dinner_and_diners, except: [:new, :edit]
 end
+
+# removed except: [:new, :edit] from pests and vegetables so no one can do curl requests to alter

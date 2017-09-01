@@ -1,18 +1,19 @@
 OrgaNick's Guide API
 
-This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables and pests and join tables for which pests prefer which vegetables (dinner-and-diners). In the near future, tables will be added for treatments and for which treatments work on which pests (pest-weaknesses).
+OrgaNick's guide is an app for organic vegetable growers where they can see the common pests that affect their crops and the organic treatments available to eliminate those pests.
 
-This API was built with Ruby on Rails.
+The deployed app can be found here: https://3point14guy.github.io/OrgaNick-s-Guide-Client/
 
-## API
+The github repository for the front end is here: https://github.com/3point14guy/OrgaNick-s-Guide-Client
 
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
+This API is deployed through Heroku at: https://boiling-dawn-26598.herokuapp.com
 
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
+This is the repo for the OrgaNick's Guide API.  This API contains tables for vegetables and pests and two join tables, one for the relationship between users and the vegetables they have in the list (gardens) and another table for which pests prefer which vegetables (dinner-and-diners). In the near future, tables will be added for treatments and for which treatments work on which pests (pest-weaknesses).  This API was built with Ruby on Rails.
+
+
+
+
+
 
 ### Vegeatables
 
@@ -24,26 +25,29 @@ tests in RSpec to test your API.
 | PATCH  | `/vegetables/:id`      |`vegetables#update` |
 | DELETE | `/vegetables/:id`      |`vegetables#destroy`|
 
-#### POST /sign-up
+Only POST and DELETE are used for this resource to allow users to add and remove vegetable's from their Gardens list.
+
+#### POST /vegetables
 
 Request:
 
 ```sh
-curl http://localhost:4741/sign-up \
+curl https://boiling-dawn-26598.herokuapp.com/vegetables \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
   --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'",
-      "password_confirmation": "'"${PASSWORD}"'"
-    }
-  }'
+    --data '{
+      "vegetable": {
+        "name": "'"${NAME}"'",
+        "image": "'"${IMAGE}"'",
+        "comment": "'"${COMMENT}"'"
+      }
+    }'
 ```
 
 ```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-up.sh
+NAME=Broccoli IMAGE=ttp://i.imgur.com/Eckc0rt.jpg COMMENTS="Enter comments here." scripts/veggies/vegetable-create.sh
 ```
 
 Response:
@@ -53,88 +57,29 @@ HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
 
 {
-  "user": {
+  "vegetable": {
     "id": 1,
-    "email": "ava@bob.com"
+    "name": "broccoli",
+    "image": "i.imgur.com/Eckc0rt.jpg"
+    "commnet": "Enter comments here."
   }
 }
 ```
 
-#### POST /sign-in
+#### DELETE /Vegetables
 
 Request:
 
 ```sh
-curl http://localhost:4741/sign-in \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'"
-    }
-  }'
-```
-
-```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-in.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com",
-    "token": "BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f"
-  }
-}
-```
-
-#### PATCH /change-password/:id
-
-Request:
-
-```sh
-curl --include --request PATCH "http://localhost:4741/change-password/$ID" \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "'"${OLDPW}"'",
-      "new": "'"${NEWPW}"'"
-    }
-  }'
-```
-
-```sh
-ID=1 OLDPW=hannah NEWPW=elle TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/:id
-
-Request:
-
-```sh
-curl http://localhost:4741/sign-out/$ID \
+https://boiling-dawn-26598.herokuapp.com/vegetables/${ID} \
   --include \
   --request DELETE \
-  --header "Authorization: Token token=$TOKEN"
+    }
+  }'
 ```
 
 ```sh
-ID=1 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/sign-out.sh
+ID=8 scripts/veggies/vegetables-delete.sh
 ```
 
 Response:
@@ -142,6 +87,7 @@ Response:
 ```md
 HTTP/1.1 204 No Content
 ```
+
 
 ### Users
 
@@ -212,20 +158,4 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-### Reset Database without dropping
-
-This is not a task developers should run often, but it is sometimes necessary.
-
-**locally**
-
-```sh
-bin/rake db:migrate VERSION=0
-bin/rake db:migrate db:seed db:examples
-```
-
-**heroku**
-
-```sh
-heroku run rake db:migrate VERSION=0
-heroku run rake db:migrate db:seed db:examples
 ```
