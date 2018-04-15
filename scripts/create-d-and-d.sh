@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VEGETABLE_ID=2
+VEGETABLE_ID=3
 PEST_ID=1
 
 # API="${API_ORIGIN:-http://localhost:4741}"
